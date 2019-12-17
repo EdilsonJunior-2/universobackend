@@ -1,0 +1,29 @@
+<h2>Lista de Satélites naturais</h2>
+
+<hr>
+<a href="/admin/satelites/add">
+    <button class="button btn btn-success">Novo Satélite</button>
+</a>
+
+{{#each satelites}}
+<div class="card">
+    <div class="card-body">
+        <h4>Nome: {{nome_SN}}</h4>
+        <p>Área: {{tam_SN}} km^2</p>
+        <p>Massa: {{massa_SN}} kg</p>
+        <p>Elemento mais ambudante: {{comp_SN}}</p>
+        <p>Planeta: {{planeta.nome_planeta}}</p>
+        <a href="/admin/satelites/edit/{{_id}}">
+            <button class="btn btn-success">Editar</button>
+        </a>
+    </div>
+</div>
+{{else}}
+<p>Nenhum satélite registrado</p>
+
+
+<form action="/admin/planetas/deletar" method="POST">
+    <input type="hidden" name="id" value="{{_id}}">
+    <button type="submit" class="btn btn-danger mt-2">Deletar</button>
+</form>
+{{/each}}

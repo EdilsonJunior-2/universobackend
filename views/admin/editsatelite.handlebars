@@ -1,0 +1,31 @@
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
+
+<div class="card">
+    <div class="card-body">
+        <h4>Editar satélite</h4>
+        <form action="/admin/satelites/edit" method="POST">
+            <input type="hidden" value="{{satelite._id}}" name="id">
+            <label for="Nome">Nome do satélite: </label>
+            <input type="text" name="nome_SN" class="form-control" value="{{satelite.nome_SN}}" required>
+            <label for="tamanho">Tamanho do satélite: </label>
+            <input type="number" step="0.001" name="tam_SN" class="form-control" value="{{satelite.tam_SN}}">
+            <label for="Massa">Massa do satélite: </label>
+            <input type="number" step="0.001" name="massa_SN" class="form-control" value="{{satelite.massa_SN}}">
+            <label for="comp">Composição do satélite: </label>
+            <input type="text" name="comp_SN" class="form-control" value="{{satelite.comp_SN}}">
+            <label for="planeta"> Planeta</label>
+            <select class="custom-select" name="planeta" id="" required>
+                {{#each planetas}}
+                <option value="{{_id}}">{{nome_planeta}}</option>
+                {{else}}
+                <option value="">Nenhum planeta registrado</option>
+                {{/each}}
+            </select>
+            <button type="submit" class="btn btn-success mt-4">Editar Satélite</button>
+        </form>
+    </div>
+</div>
