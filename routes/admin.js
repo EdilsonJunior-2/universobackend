@@ -19,7 +19,7 @@ router.get('/planetas', (req, res) => {
         res.redirect("admin");
     })
 });
-
+/*
 router.get("/planetas/add", (req, res) => {
     res.render("admin/addplaneta");
 });
@@ -97,7 +97,7 @@ router.post("/planetas/deletar", (req, res) => {
         req.flash("error_msg", "Houve um erro ao remover o planeta");
         res.redirect("/admin/planetas");
     });
-});
+});*/
 
 router.get("/satelites", (req, res) => {
 
@@ -108,7 +108,7 @@ router.get("/satelites", (req, res) => {
         res.redirect("/admin");
     })
 });
-
+/*
 router.get("/satelites/add", (req, res) => {
     Planetas.find().then((planetas) => {
         res.render("admin/addsatelite", {planetas: planetas})
@@ -185,6 +185,6 @@ router.post("/satelites/edit", (req, res) => {
         res.redirect("/admin/satelites");
     })
 })
-
+*/
 
 module.exports = router;
