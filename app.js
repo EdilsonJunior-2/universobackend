@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const cors = require('cors');
+const db = require("./config/db");
 
 //configurações
 //sessão
@@ -34,7 +35,7 @@ app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 //mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/universo").then(() => {
+mongoose.connect(db.mongoURI).then(() => {
     console.log("conectado ao mongo");
 }).catch((err) => {
     console.log("Erro ao se conectar ao mongo: " + err);
