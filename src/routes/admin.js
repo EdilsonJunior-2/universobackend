@@ -40,7 +40,12 @@ router.post('/planetas', (req, res) => {
             gravidade_planeta: req.body.gravidade_planeta,
             comp_planeta: req.body.comp_planeta
         };
-        new Planeta(novoPlaneta).save();
+    
+        new Planeta(novoPlaneta).save().then(() => {
+            res.status(201).send('Requisição recebida com sucesso!');
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao salvar o planeta, tente novamente")
+        });    
     }
 })
 
