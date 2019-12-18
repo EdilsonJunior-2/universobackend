@@ -21,6 +21,37 @@ router.get('/planetas', (req, res) => {
     })
 });
 
+router.post('/planetas', (req, res) => {
+    var erros = [];
+
+    if(!req.body.nome_planeta || 
+        req.body.nome_planeta == undefined || 
+        req.body.nome_planeta == null){
+            erros.push({texto: "Nome inválido"})
+    }
+
+    if(erros.length > 0){
+        res.render("admin/addplaneta", {erros: erros})
+    }else{
+        const novoPlaneta = {
+            nome_planeta: req.body.nome_planeta,
+            tam_planeta: req.body.tam_planeta,
+            massa_planeta: req.body.massa_planeta,
+            gravidade_planeta: req.body.gravidade_planeta,
+            comp_planeta: req.body.comp_planeta
+        };
+    
+        new Planetas(novoPlaneta).save().then(() => {
+            req.flash("success_msg", "Planeta adicionado com sucesso");
+            console.log("Planeta adicionado com sucesso");
+            res.send({planetas});
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao salvar o planeta, tente novamente")
+            res.send({planetas});
+        });    
+    }
+})
+
 router.get("/satelites", (req, res) => {
 
     Satelite.find().populate("planeta").sort({data: "asc"}).then((satelites) => {
