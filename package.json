@@ -4,12 +4,17 @@
     "description": "",
     "main": "index.js",
     "dependencies": {
-      "express": "^4.15.4"
+      "express": "^4.15.4",
+      "nodemon": "2.0.2",
+      "body-parser": "1.19.0",
+      "express-session": "1.17.0",
+      "path": "0.12.7",
+      "mongoose": "5.8.1"
     },
     "devDependencies": {},
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "nodemon ./bin/server.js"
+      "start": "nodemon ./src/app.js"
     },
     "keywords": [],
     "author": "",
