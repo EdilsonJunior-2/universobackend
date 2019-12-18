@@ -41,7 +41,7 @@ router.post('/planetas', (req, res) => {
             comp_planeta: req.body.comp_planeta
         };
     
-        new Planetas(novoPlaneta).save().then(() => {
+        new Planeta(novoPlaneta).save().then(() => {
             req.flash("success_msg", "Planeta adicionado com sucesso");
             console.log("Planeta adicionado com sucesso");
             res.send({planetas});
