@@ -17,7 +17,7 @@ router.get('/planetas', (req, res) => {
     Planeta.find().sort({nome_planeta: 'asc'}).then((planetas) => {
         res.send({planetas});
     }).catch((err) => {
-        res.redirect("admin");
+        res.send(err);
     })
 });
 
