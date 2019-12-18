@@ -5,6 +5,7 @@ const admin = require("./routes/admin");
 const session = require("express-session")
 const mongoose = require("mongoose");
 const path = require("path");
+const cors = require("cors");
 
 app.use(session({
     secret: "anyway",
@@ -14,6 +15,8 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb+srv://edilsonjr:paodebatata@cluster0-3nte5.mongodb.net/test?retryWrites=true&w=majority").then(() => {
