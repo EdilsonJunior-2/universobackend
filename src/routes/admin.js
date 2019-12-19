@@ -42,7 +42,7 @@ router.post('/planetas', (req, res) => {
         };
     
         new Planeta(novoPlaneta).save().then(() => {
-            res.status(201).send('Requisição recebida com sucesso!');
+            res.status(200).send('Requisição recebida com sucesso!');
         }).catch((err) => {
             req.flash("error_msg", "Houve um erro ao salvar o planeta, tente novamente")
         });    
