@@ -7,22 +7,10 @@ const Planeta = new Schema({
         type: String,
         required: true
     },
-    tam_planeta: {
-        type: Number,
-        required: true,
-    },
-    massa_planeta: {
-        type: Number,
-        required: true,
-    },
-    gravidade_planeta: {
-        type: Float,
-        required: true,
-    },
-    comp_planeta: {
-        type: String,
-        required: true,
-    }
+    tam_planeta: Number,
+    massa_planeta: Number,
+    gravidade_planeta: Float,
+    comp_planeta: String
 });
 
 mongoose.model("planetas", Planeta);
