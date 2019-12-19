@@ -22,13 +22,6 @@ router.get('/planetas', (req, res) => {
 });
 
 router.post('/planetas', (req, res) => {
-    var erros = [];
-
-    if (!req.body.nome_planeta ||
-        req.body.nome_planeta == undefined ||
-        req.body.nome_planeta == null) {
-        erros.push({ texto: "Nome inválido" })
-    }
 
     if (erros.length > 0) {
         res.render("admin/addplaneta", { erros: erros })
@@ -56,6 +49,27 @@ router.get("/planetas/del/:id", (req, res) => {
         res.status(404).send('Deu ruim');
     })
 
+});
+
+router.post("/planetas/edit/:id", (req, res) => {
+
+    Planetas.findOne({_id: req.body.id}).then((planeta) =>{
+
+        planeta.nome_planeta = req.body.nome_planeta;
+        planeta.tam_planeta = req.body.tam_planeta;
+        planeta.massa_planeta = req.body.massa_planeta;
+        planeta.gravidade_planeta = req.body.gravidade_planeta;
+        planeta.comp_planeta = req.body.comp_planeta;
+
+        planeta.save().then(() => {
+            res.status(200).send('Alterou de boas');
+        }).catch((err) => {
+           res.status(404).send('Deu ruim ao alterar' + err);
+        });
+
+    }).catch((err) => {
+        res.status(404).send('Deu ruim ao alterar: ' + err);
+    })
 });
 
 router.get("/satelites", (req, res) => {
