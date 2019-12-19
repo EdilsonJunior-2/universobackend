@@ -50,7 +50,7 @@ router.post('/planetas', (req, res) => {
 });
 
 router.get("/planetas/del/:id", (req, res) => {
-    Planetas.remove({ _id: req.params.id }).then(() => {
+    Planeta.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Deletou de boas')
     }).catch((err) => {
         res.status(404).send('Deu ruim');
