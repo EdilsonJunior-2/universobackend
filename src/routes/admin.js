@@ -44,10 +44,18 @@ router.post('/planetas', (req, res) => {
         new Planeta(novoPlaneta).save().then(() => {
             res.status(200).send('Requisição recebida com sucesso!');
         }).catch((err) => {
-            req.flash("error_msg", "Houve um erro ao salvar o planeta, tente novamente")
+            res.status(404).send('Deu ruim');
         });    
     }
-})
+});
+
+router.post("/planetas/del", (req, res) => {
+    Planetas.remove({_id: req.body.id}).then(() => {
+        res.status(200).send('Deletou de boas')
+    }).catch((err) => {
+        res.status(404).send('Deu ruim');
+    });
+});
 
 router.get("/satelites", (req, res) => {
 
@@ -58,5 +66,7 @@ router.get("/satelites", (req, res) => {
         res.redirect("/admin");
     })
 });
+
+
 
 module.exports = router;
