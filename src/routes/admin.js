@@ -49,7 +49,7 @@ router.post('/planetas', (req, res) => {
     }
 });
 
-router.post("/planetas/del", (req, res) => {
+router.delete("/planetas/del", (req, res) => {
     Planetas.remove({_id: req.body.id}).then(() => {
         res.status(200).send('Deletou de boas')
     }).catch((err) => {
