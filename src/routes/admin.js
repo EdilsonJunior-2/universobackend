@@ -23,9 +23,6 @@ router.get('/planetas', (req, res) => {
 
 router.post('/planetas', (req, res) => {
 
-    if (erros.length > 0) {
-        res.render("admin/addplaneta", { erros: erros })
-    } else {
         const novoPlaneta = {
             nome_planeta: req.body.nome_planeta,
             tam_planeta: req.body.tam_planeta,
@@ -39,7 +36,6 @@ router.post('/planetas', (req, res) => {
         }).catch((err) => {
             res.status(404).send('Deu ruim');
         });
-    }
 });
 
 router.get("/planetas/del/:id", (req, res) => {
