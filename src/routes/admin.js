@@ -49,7 +49,7 @@ router.get("/planetas/del/:id", (req, res) => {
 
 router.post("/planetas/edit/:id", (req, res) => {
 
-    Planetas.findOne({_id: req.body.id}).then((planeta) =>{
+    Planeta.findOne({_id: req.body.id}).then((planeta) =>{
 
         planeta.nome_planeta = req.body.nome_planeta;
         planeta.tam_planeta = req.body.tam_planeta;
