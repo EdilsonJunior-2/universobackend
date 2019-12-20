@@ -23,13 +23,7 @@ router.get('/planetas', (req, res) => {
 
 router.post('/planetas', (req, res) => {
 
-        const novoPlaneta = {
-            nome_planeta: req.body.nome_planeta,
-            tam_planeta: req.body.tam_planeta,
-            massa_planeta: req.body.massa_planeta,
-            gravidade_planeta: req.body.gravidade_planeta,
-            comp_planeta: req.body.comp_planeta
-        };
+        const novoPlaneta = req.body;
 
         new Planeta(novoPlaneta).save().then(() => {
             res.status(200).send('Requisição recebida com sucesso!');
