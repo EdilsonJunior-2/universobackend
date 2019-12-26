@@ -73,10 +73,8 @@ router.post("/satelites", (req, res) => {
     const novoSatelite = req.body;
 
     new Satelite(novoSatelite).save().then(() => {
-        req.flash("success_msg", "Satélite registrado com sucesso");
-        res.redirect("/admin/satelites");
+        res.status(200).send('Requisição recebida com sucesso!');
     }).catch((err) => {
-        req.flash("error_msg", "Houve um erro durante o registro do satélite");
         res.redirect("/admin/satelites");
     })
 
