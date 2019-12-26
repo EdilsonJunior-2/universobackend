@@ -23,13 +23,13 @@ router.get('/planetas', (req, res) => {
 
 router.post('/planetas', (req, res) => {
 
-        const novoPlaneta = req.body;
+    const novoPlaneta = req.body;
 
-        new Planeta(novoPlaneta).save().then(() => {
-            res.status(200).send('Requisição recebida com sucesso!');
-        }).catch((err) => {
-            res.status(404).send('Deu ruim');
-        });
+    new Planeta(novoPlaneta).save().then(() => {
+        res.status(200).send('Requisição recebida com sucesso!');
+    }).catch((err) => {
+        res.status(404).send('Deu ruim');
+    });
 });
 
 router.get("/planetas/del/:id", (req, res) => {
@@ -43,18 +43,14 @@ router.get("/planetas/del/:id", (req, res) => {
 
 router.post("/planetas/edit/:id", (req, res) => {
 
-    Planeta.findOne({_id: req.params.id}).then((planeta) =>{
+    Planeta.findOne({ _id: req.params.id }).then((planeta) => {
 
-        planeta.nome_planeta = req.body.nome_planeta;
-        planeta.tam_planeta = req.body.tam_planeta;
-        planeta.massa_planeta = req.body.massa_planeta;
-        planeta.gravidade_planeta = req.body.gravidade_planeta;
-        planeta.comp_planeta = req.body.comp_planeta;
+        planeta = req.body;
 
         planeta.save().then(() => {
             res.status(200).send('Alterou de boas');
         }).catch((err) => {
-           res.status(404).send('Deu ruim ao alterar' + err);
+            res.status(404).send('Deu ruim ao alterar' + err);
         });
 
     }).catch((err) => {
@@ -72,6 +68,18 @@ router.get("/satelites", (req, res) => {
     })
 });
 
+router.post("/satelites", (req, res) => {
 
+    const novoSatelite = req.body;
+
+    new Satelite(novoSatelite).save().then(() => {
+        req.flash("success_msg", "Satélite registrado com sucesso");
+        res.redirect("/admin/satelites");
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro durante o registro do satélite");
+        res.redirect("/admin/satelites");
+    })
+
+});
 
 module.exports = router;
