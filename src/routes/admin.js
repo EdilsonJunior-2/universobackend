@@ -94,6 +94,7 @@ router.post("/satelites/edit/:id", (req, res) => {
         });
 
     }).catch((err) => {
+        console.log(err)
         res.status(301).send('Deu ruim ao alterar: ' + err);
     })
 });
