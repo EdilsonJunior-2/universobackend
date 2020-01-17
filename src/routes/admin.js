@@ -86,7 +86,7 @@ router.post("/satelites/edit/:id", (req, res) => {
     Satelite.findOne({ _id: req.params.id }).then((satelite) => {
 
         satelite = req.body;
-
+        console.log(satelite);
         satelite.save().then(() => {
             res.status(200).send('Alterou de boas');
         }).catch((err) => {
