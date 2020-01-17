@@ -83,8 +83,15 @@ router.post("/satelites", (req, res) => {
 router.post("/satelites/edit/:id", (req, res) => {
     console.log(req.params.id)
 
-    Satelite.findOne({ _id: req.params.id }).then((satelite) => {
+    
+    Satelite.findByIdAndUpdate(req.params.id, {
+        $set: req.body,
+    });
 
+    return res.status(200).send("Atualizado");
+    
+    /*Satelite.findOne({ _id: req.params.id }).then((satelite) => {
+       
         satelite = req.body;
         console.log(satelite);
         satelite.save().then(() => {
@@ -96,7 +103,7 @@ router.post("/satelites/edit/:id", (req, res) => {
     }).catch((err) => {
         console.log(err)
         res.status(301).send('Deu ruim ao alterar: ' + err);
-    })
+    })*/
 });
 
 module.exports = router;
