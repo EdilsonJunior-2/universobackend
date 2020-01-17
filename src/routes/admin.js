@@ -80,4 +80,21 @@ router.post("/satelites", (req, res) => {
 
 });
 
+router.post("/satelites/edit/:id", (req, res) => {
+
+    Satelite.findOne({ _id: req.params.id }).then((satelite) => {
+
+        satelite = req.body;
+
+        satelite.save().then(() => {
+            res.status(200).send('Alterou de boas');
+        }).catch((err) => {
+            res.status(404).send('Deu ruim ao alterar' + err);
+        });
+
+    }).catch((err) => {
+        res.status(404).send('Deu ruim ao alterar: ' + err);
+    })
+});
+
 module.exports = router;
