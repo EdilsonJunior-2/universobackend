@@ -81,6 +81,7 @@ router.post("/satelites", (req, res) => {
 });
 
 router.post("/satelites/edit/:id", (req, res) => {
+    console.log(req.params.id)
 
     Satelite.findOne({ _id: req.params.id }).then((satelite) => {
 
