@@ -83,13 +83,13 @@ router.post("/satelites", (req, res) => {
 router.post("/satelites/edit/:id", (req, res) => {
     console.log(req.params.id)
 
-    
     Satelite.findByIdAndUpdate(req.params.id, {
         $set: req.body,
+    }).then(() => {
+        res.status(200).send("Atualizado");
+    }).catch((err) => {
+        res.status(301).send("Fudeu");
     });
-
-    return res.status(200).send("Atualizado");
-    
     /*Satelite.findOne({ _id: req.params.id }).then((satelite) => {
        
         satelite = req.body;
