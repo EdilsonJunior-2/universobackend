@@ -12,11 +12,6 @@ const Satelite = new Schema({
     comp_SN: {
         type: String,
         default: "indeterminado"
-    }, 
-    planeta:{
-        type: Schema.Types.ObjectId,
-        ref: "planetas",
-        required: true
     }
 });
 
