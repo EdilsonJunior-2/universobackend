@@ -5,6 +5,7 @@ require("../../models/Planeta");
 const Planeta = mongoose.model("planetas");
 require("../../models/Satelite");
 const Satelite = mongoose.model("satelites");
+require("../../models/Usuario");
 const Usuario = mongoose.model("usuarios");
 require("dotenv-safe").config();
 var jwt = require('jsonwebtoken');
