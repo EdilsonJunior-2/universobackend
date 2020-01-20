@@ -8,10 +8,11 @@ const Satelite = new Schema({
         required: true
     },
     tam_SN:Float,
-
     massa_SN: Number,
-    comp_SN: String,
-    
+    comp_SN: {
+        type: String,
+        default: "indeterminado"
+    }, 
     planeta:{
         type: Schema.Types.ObjectId,
         ref: "planetas",
