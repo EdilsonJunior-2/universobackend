@@ -5,6 +5,9 @@ require("../../models/Planeta");
 const Planeta = mongoose.model("planetas");
 require("../../models/Satelite");
 const Satelite = mongoose.model("satelites");
+const Usuario = mongoose.model("usuarios");
+require("dotenv-safe").config();
+var jwt = require('jsonwebtoken');
 
 //principal
 router.get('/', (req, res, next) => {
@@ -13,6 +16,34 @@ router.get('/', (req, res, next) => {
         version: "0.1"
     });
 });
+
+//Login
+router.post('/login', (req, res, next) => {
+    Usuario.findOne({ email: req.body.email }).then((usuario) => {
+        if( req.body.senha = usuario.senha){
+            const id = usuario._id;
+            var token = jwt.sign({ id }, process.env.SECRET, {
+                expiresIn: "1h"
+            });
+            res.status(200).send({ auth: true, token: token });
+        }
+
+        res.status(500).send('Login inválido!');
+    })
+});
+
+router.get('/logout', function(req, res) {
+    res.status(200).send({ auth: false, token: null });
+})
+
+router.post('/cadastro', (req, res) => {
+    const novoUsuario = req.body;
+    new Usuario(novoUsuario).save().then(() => {
+        res.status(200).send('Usuário Criado com sucesso!');
+    }).catch((err) => {
+        res.status(404).send('Erro: ' + err);
+    });
+})
 
 //Planetas
 router.get('/planetas', (req, res) => {
@@ -50,6 +81,8 @@ router.get("/planetas/del/:id", (req, res) => {
         res.status(301).send('Erro ao deletar : ' + err);
     })
 });
+
+
 
 //Satélites
 router.get("/satelites", (req, res) => {
