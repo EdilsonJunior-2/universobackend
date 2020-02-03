@@ -20,8 +20,11 @@ router.get('/', (req, res, next) => {
 
 //Login
 router.post('/login', (req, res, next) => {
+    console.log("post");
     Usuario.findOne({ nome: req.body.nome }).then((usuario) => {
+        console.log(req.body);
         if( req.body.senha = usuario.senha){
+            console.log(req.body);
             const id = usuario._id;
             var token = jwt.sign({ id }, process.env.SECRET, {
                 expiresIn: "1h"
