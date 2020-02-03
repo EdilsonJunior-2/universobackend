@@ -32,6 +32,14 @@ router.post('/login', (req, res, next) => {
     })
 });
 
+router.get('/usuario', (req, res) => {
+    Usuario.find().sort({ nome: 'asc' }).then((usuarios) => {
+        res.send({ usuarios });
+    }).catch((err) => {
+        res.send(err);
+    })
+});
+
 router.get('/logout', function(req, res) {
     res.status(200).send({ auth: false, token: null });
 })
