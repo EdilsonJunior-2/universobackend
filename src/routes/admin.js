@@ -20,26 +20,15 @@ router.get('/', (req, res, next) => {
 
 //Login
 router.post('/login', (req, res, next) => {
-    console.log("post");
     Usuario.findOne({ nome: req.body.nome }).then((usuario) => {
-        console.log(req.body);
-        if( req.body.senha = usuario.senha){
-            console.log(req.body);
+        if( req.body.senha === usuario.senha){
             const id = usuario._id;
             var token = jwt.sign({ id }, process.env.SECRET, {
                 expiresIn: "1h"
             });
-            res.status(200).send({ auth: true, token: token });
+            res.status(200).send({ auth: true, token: token }); 
         }
         res.status(500).send('Login inválido!');
-    })
-});
-
-router.get('/usuario', (req, res) => {
-    Usuario.find().sort({ nome: 'asc' }).then((usuarios) => {
-        res.send({ usuarios });
-    }).catch((err) => {
-        res.send(err);
     })
 });
 
