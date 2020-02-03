@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
 
 //Login
 router.post('/login', (req, res, next) => {
-    Usuario.findOne({ nome: req.body.nome }).then((nome) => {
+    Usuario.findOne({ nome: req.body.nome }).then((usuario) => {
         if( req.body.senha = usuario.senha){
             const id = usuario._id;
             var token = jwt.sign({ id }, process.env.SECRET, {
