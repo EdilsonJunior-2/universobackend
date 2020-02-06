@@ -11,7 +11,8 @@ const Planeta = new Schema({
     massa_planeta: Number,
     gravidade_planeta: Float,
     comp_planeta: String,
-    curiosidade_planeta: String
+    curiosidade_planeta: String,
+    img_planeta: String
 });
 
 mongoose.model("planetas", Planeta);
