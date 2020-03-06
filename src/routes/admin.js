@@ -147,7 +147,7 @@ router.post("/estrela", (req, res) => {
 //Anãs brancas
 
 router.get("/anasBrancas", (req, res) => {
-    Estrela.find({tipo_estrela: "Anã branca"}).sort({ data: "asc" }).then((anas_brancas) => {
+    Estrela.find({tipo_estrela: "Anã branca"}).then((anas_brancas) => {
         res.status(200).send({ anas_brancas });
     }).catch((err) => {
         res.status(301).send("Erro: " + err);
