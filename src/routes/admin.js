@@ -7,6 +7,8 @@ require("../../models/Satelite");
 const Satelite = mongoose.model("satelites");
 require("../../models/Usuario");
 const Usuario = mongoose.model("usuarios");
+require("../../models/Estrela");
+const Estrela = mongoose.model("estrelas");
 require("dotenv-safe").config();
 var jwt = require('jsonwebtoken');
 
@@ -86,7 +88,7 @@ router.get("/planetas/del/:id", (req, res) => {
 
 //Satélites
 router.get("/satelites", (req, res) => {
-    Satelite.find().populate("planeta").sort({ data: "asc" }).then((satelites) => {
+    Satelite.find().sort({ data: "asc" }).then((satelites) => {
         res.status(200).send({ satelites })
     }).catch((err) => {
         res.status(301).end("Erro: " + err);
@@ -120,5 +122,28 @@ router.get("/satelites/del/:id", (req, res) => {
         res.status(404).send('Erro ao deletar');
     })
 });
+
+//Estrelas
+
+router.get("/estrelas", (req, res) => {
+    Estrela.find().sort({ data: "asc" }).then((estrelas) => {
+        res.status(200).send({ estrelas })
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+});
+
+//Anãs brancas
+
+router.get("/anasBrancas", (req, res) => {
+    Estrela.find({tipo_estrela: "Anã branca"}).sort({ data: "asc" }).then((anas_brancas) => {
+        res.status(200).send({ anas_brancas });
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+})
+
+
+
 
 module.exports = router;
