@@ -133,6 +133,17 @@ router.get("/estrelas", (req, res) => {
     })
 });
 
+router.post("/estrela", (req, res) => {
+    const novaEstrela = req.body;
+    new Estrela(novaEstrela).save().then(() => {
+        res.status(200).send('Requisição recebida com sucesso!');
+    }).catch((err) => {
+        res.redirect("/admin/estrelas");
+        res.status(301).send(err);
+    })
+
+});
+
 //Anãs brancas
 
 router.get("/anasBrancas", (req, res) => {
