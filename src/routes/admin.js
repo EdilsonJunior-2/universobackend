@@ -65,7 +65,7 @@ router.post('/planetas', (req, res) => {
     });
 });
 
-router.post("/planetas/edit/:id", (req, res) => {
+router.put("/planetas/edit/:id", (req, res) => {
     
     Planeta.findByIdAndUpdate(req.params.id, {
         $set: req.body,
@@ -76,9 +76,9 @@ router.post("/planetas/edit/:id", (req, res) => {
     });
 });
 
-router.get("/planetas/del/:id", (req, res) => {
+router.delete("/planetas/del/:id", (req, res) => {
     Planeta.remove({ _id: req.params.id }).then(() => {
-        res.status(200).send('Deletou de boas')
+        res.status(200).send('Deletado')
     }).catch((err) => {
         res.status(301).send('Erro ao deletar : ' + err);
     })
@@ -95,7 +95,7 @@ router.get("/satelites", (req, res) => {
     })
 });
 
-router.post("/satelites", (req, res) => {
+router.post("/satelite", (req, res) => {
     const novoSatelite = req.body;
     new Satelite(novoSatelite).save().then(() => {
         res.status(200).send('Requisição recebida com sucesso!');
@@ -105,7 +105,7 @@ router.post("/satelites", (req, res) => {
 
 });
 
-router.post("/satelites/edit/:id", (req, res) => {
+router.put("/satelite/edit/:id", (req, res) => {
     Satelite.findByIdAndUpdate(req.params.id, {
         $set: req.body,
     }).then(() => {
@@ -115,9 +115,9 @@ router.post("/satelites/edit/:id", (req, res) => {
     });
 });
 
-router.get("/satelites/del/:id", (req, res) => {
+router.delete("/satelite/del/:id", (req, res) => {
     Satelite.remove({ _id: req.params.id }).then(() => {
-        res.status(200).send('Deletou de boas')
+        res.status(200).send('Deletado')
     }).catch((err) => {
         res.status(404).send('Erro ao deletar');
     })
@@ -143,7 +143,7 @@ router.post("/estrela", (req, res) => {
     })
 });
 
-router.post("/estrela/edit/:id", (req, res) => {
+router.put("/estrela/edit/:id", (req, res) => {
     Estrela.findByIdAndUpdate(req.params.id, {
         $set: req.body,
     }).then(() => {
@@ -153,7 +153,7 @@ router.post("/estrela/edit/:id", (req, res) => {
     });
 });
 
-router.get("/estrela/del/:id", (req, res) => {
+router.delete("/estrela/del/:id", (req, res) => {
     Estrela.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Deletou de boas')
     }).catch((err) => {
