@@ -203,7 +203,7 @@ router.get("/gigantesVermelhas", (req, res) => {
 
 //Estrelas binárias
 
-router.get("/anasBrancas", (req, res) => {
+router.get("/estrelasBinarias", (req, res) => {
     Estrela.find({tipo_estrela: "Estrela binária"}).then((estrelas_binarias) => {
         res.status(200).send({ estrelas_binarias });
     }).catch((err) => {
