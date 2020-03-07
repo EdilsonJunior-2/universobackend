@@ -141,21 +141,75 @@ router.post("/estrela", (req, res) => {
         res.redirect("/admin/estrelas");
         res.status(301).send(err);
     })
+});
 
+router.post("/estrela/edit/:id", (req, res) => {
+    Estrela.findByIdAndUpdate(req.params.id, {
+        $set: req.body,
+    }).then(() => {
+        res.status(200).send("Atualizado");
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    });
+});
+
+router.get("/estrela/del/:id", (req, res) => {
+    Estrela.remove({ _id: req.params.id }).then(() => {
+        res.status(200).send('Deletou de boas')
+    }).catch((err) => {
+        res.status(404).send('Erro ao deletar: ' + err);
+    })
 });
 
 //Anãs brancas
 
 router.get("/anasBrancas", (req, res) => {
     Estrela.find({tipo_estrela: "Anã branca"}).then((anas_brancas) => {
-        console.log(anas_brancas);
         res.status(200).send({ anas_brancas });
     }).catch((err) => {
         res.status(301).send("Erro: " + err);
     })
 })
 
+//Anãs vermelhas
 
+router.get("/anasVermelhas", (req, res) => {
+    Estrela.find({tipo_estrela: "Anã vermelha"}).then((anas_vermelhas) => {
+        res.status(200).send({ anas_vermelhas });
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+})
+
+//Gigantes azuis
+
+router.get("/gigantesAzuis", (req, res) => {
+    Estrela.find({tipo_estrela: "Gigante azul"}).then((gigantes_azuis) => {
+        res.status(200).send({ gigantes_azuis });
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+})
+
+//Gigantes vermelhas
+
+router.get("/gigantesVermelhas", (req, res) => {
+    Estrela.find({tipo_estrela: "Gigante vermelha"}).then((gigantes_vermelhas) => {
+        res.status(200).send({ gigantes_vermelhas });
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+})
+
+//Estrelas binárias
+
+router.get("/anasBrancas", (req, res) => {
+    Estrela.find({tipo_estrela: "Estrela binária"}).then((estrelas_binarias) => {
+        res.status(200).send({ estrelas_binarias });
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+})
 
 
 module.exports = router;
