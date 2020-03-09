@@ -9,6 +9,8 @@ require("../../models/Usuario");
 const Usuario = mongoose.model("usuarios");
 require("../../models/Estrela");
 const Estrela = mongoose.model("estrelas");
+require("../../models/SistemaPlanetario");
+const SistemaPlanetario = mongoose.model("sistemasPlanetarios");
 require("dotenv-safe").config();
 var jwt = require('jsonwebtoken');
 
@@ -210,6 +212,26 @@ router.get("/estrelasBinarias", (req, res) => {
         res.status(301).send("Erro: " + err);
     })
 })
+
+//Sistemas Planetários
+
+router.get("/sistemasPlanetarios", (req, res) => {
+    SistemaPlanetario.find().populate('planetas').then((sistemas_planetarios) => {
+        res.status(200).send({ sistemas_planetarios });
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+})
+
+router.post("/estrela", (req, res) => {
+    const novoSistema = req.body;
+    new SistemaPlanetario(novoSistema).save().then(() => {
+        res.status(200).send('Requisição recebida com sucesso!');
+    }).catch((err) => {
+        res.redirect("/admin/sistemasPlanetarios");
+        res.status(301).send(err);
+    })
+});
 
 
 module.exports = router;

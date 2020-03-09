@@ -8,6 +8,8 @@ const Estrela = new Schema({
         required: true
     },
     idade_estrela: Number,
+    tam_estrela: Number,
+    massa_estrela: Number,
     distancia_terra: Number,
     gravidade_estrela: Float,
     tipo_estrela: {
