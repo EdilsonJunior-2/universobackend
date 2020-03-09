@@ -13,7 +13,7 @@ const SistemaPlanetario = new Schema({
     }],
     qtd_planetas: {
         type: Number,
-        default: planetas.length
+        default: this.planetas.length
     }
 })
 
