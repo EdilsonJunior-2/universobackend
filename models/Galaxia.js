@@ -7,11 +7,6 @@ const Galaxia = new Schema({
         type: String,
         required: true
     },
-    qtd_sistemas:[{
-        type: Schema.Types.ObjectId,
-        type: 'sistemasPlanetarios',
-        required: true
-    }].length,
     dist_terra: Number
 })
 

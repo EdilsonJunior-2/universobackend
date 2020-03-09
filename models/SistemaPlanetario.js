@@ -7,10 +7,14 @@ const SistemaPlanetario = new Schema({
         required: true
     },
     idade_sistema: Number,
-    qtd_planetas: [{
+    planetas: [{
         type: Schema.Types.ObjectId,
         ref: 'planetas'
-    }].length
+    }],
+    qtd_planetas: {
+        type: Number,
+        default: planetas.length
+    }
 })
 
 mongoose.model("sistemasPlanetarios", SistemaPlanetario);
