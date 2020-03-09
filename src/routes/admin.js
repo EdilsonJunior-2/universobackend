@@ -47,7 +47,7 @@ router.post('/cadastro', (req, res) => {
     new Usuario(novoUsuario).save().then(() => {
         res.status(200).send('Usuário Criado com sucesso!');
     }).catch((err) => {
-        res.status(404).send('Erro: ' + err);
+        res.status(500).send('Erro: ' + err);
     });
 })
 
@@ -65,7 +65,7 @@ router.post('/planetas', (req, res) => {
     new Planeta(novoPlaneta).save().then(() => {
         res.status(200).send('Requisição recebida com sucesso!');
     }).catch((err) => {
-        res.status(404).send('Erro: ' + err);
+        res.status(500).send('Erro: ' + err);
     });
 });
 
@@ -76,7 +76,7 @@ router.put("/planetas/edit/:id", (req, res) => {
     }).then(() => {
         res.status(200).send("Atualizado");
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     });
 });
 
@@ -84,7 +84,7 @@ router.delete("/planetas/del/:id", (req, res) => {
     Planeta.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Deletado')
     }).catch((err) => {
-        res.status(301).send('Erro ao deletar : ' + err);
+        res.status(500).send('Erro ao deletar : ' + err);
     })
 });
 
@@ -95,7 +95,7 @@ router.get("/satelites", (req, res) => {
     Satelite.find().sort({ data: "asc" }).then((satelites) => {
         res.status(200).send({ satelites })
     }).catch((err) => {
-        res.status(301).end("Erro: " + err);
+        res.status(500).end("Erro: " + err);
     })
 });
 
@@ -115,7 +115,7 @@ router.put("/satelite/edit/:id", (req, res) => {
     }).then(() => {
         res.status(200).send("Atualizado");
     }).catch((err) => {
-        res.status(301).send("Erro");
+        res.status(500).send("Erro");
     });
 });
 
@@ -123,7 +123,7 @@ router.delete("/satelite/del/:id", (req, res) => {
     Satelite.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Deletado')
     }).catch((err) => {
-        res.status(404).send('Erro ao deletar');
+        res.status(500).send('Erro ao deletar');
     })
 });
 
@@ -133,7 +133,7 @@ router.get("/estrelas", (req, res) => {
     Estrela.find().sort({ data: "asc" }).then((estrelas) => {
         res.status(200).send({ estrelas })
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 });
 
@@ -143,7 +143,7 @@ router.post("/estrela", (req, res) => {
         res.status(200).send('Requisição recebida com sucesso!');
     }).catch((err) => {
         res.redirect("/admin/estrelas");
-        res.status(301).send(err);
+        res.status(500).send(err);
     })
 });
 
@@ -153,7 +153,7 @@ router.put("/estrela/edit/:id", (req, res) => {
     }).then(() => {
         res.status(200).send("Atualizado");
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     });
 });
 
@@ -161,7 +161,7 @@ router.delete("/estrela/del/:id", (req, res) => {
     Estrela.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Deletou de boas')
     }).catch((err) => {
-        res.status(404).send('Erro ao deletar: ' + err);
+        res.status(500).send('Erro ao deletar: ' + err);
     })
 });
 
@@ -171,7 +171,7 @@ router.get("/anasBrancas", (req, res) => {
     Estrela.find({tipo_estrela: "Anã branca"}).then((anas_brancas) => {
         res.status(200).send({ anas_brancas });
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 })
 
@@ -181,7 +181,7 @@ router.get("/anasVermelhas", (req, res) => {
     Estrela.find({tipo_estrela: "Anã vermelha"}).then((anas_vermelhas) => {
         res.status(200).send({ anas_vermelhas });
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 })
 
@@ -191,7 +191,7 @@ router.get("/gigantesAzuis", (req, res) => {
     Estrela.find({tipo_estrela: "Gigante azul"}).then((gigantes_azuis) => {
         res.status(200).send({ gigantes_azuis });
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 })
 
@@ -201,7 +201,7 @@ router.get("/gigantesVermelhas", (req, res) => {
     Estrela.find({tipo_estrela: "Gigante vermelha"}).then((gigantes_vermelhas) => {
         res.status(200).send({ gigantes_vermelhas });
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 })
 
@@ -211,7 +211,7 @@ router.get("/estrelasBinarias", (req, res) => {
     Estrela.find({tipo_estrela: "Estrela binária"}).then((estrelas_binarias) => {
         res.status(200).send({ estrelas_binarias });
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 })
 
@@ -224,7 +224,7 @@ router.get("/sistemasPlanetarios", (req, res) => {
         }
         res.status(200).send({ sistemas_planetarios });
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 })
 
@@ -234,7 +234,7 @@ router.post("/sistemaPlanetario", (req, res) => {
         res.status(200).send('Requisição recebida com sucesso!');
     }).catch((err) => {
         res.redirect("/admin/sistemasPlanetarios");
-        res.status(301).send(err);
+        res.status(500).send(err);
     })
 });
 
@@ -247,7 +247,7 @@ router.get("/galaxias", (req, res) => {
         }
         res.status(200).send({ galaxias });
     }).catch((err) => {
-        res.status(301).send("Erro: " + err);
+        res.status(500).send("Erro: " + err);
     })
 })
 
@@ -257,7 +257,7 @@ router.post("/galaxia", (req, res) => {
         res.status(200).send('Requisição recebida com sucesso!');
     }).catch((err) => {
         res.redirect("/admin/galaxias");
-        res.status(301).send(err);
+        res.status(500).send(err);
     })
 });
 
