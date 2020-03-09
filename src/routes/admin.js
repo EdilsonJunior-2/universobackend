@@ -228,7 +228,7 @@ router.get("/sistemasPlanetarios", (req, res) => {
     })
 })
 
-router.post("/sistemasPlanetario", (req, res) => {
+router.post("/sistemaPlanetario", (req, res) => {
     const novoSistema = req.body;
     new SistemaPlanetario(novoSistema).save().then(() => {
         res.status(200).send('Requisição recebida com sucesso!');
