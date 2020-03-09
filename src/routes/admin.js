@@ -217,17 +217,16 @@ router.get("/estrelasBinarias", (req, res) => {
 
 router.get("/sistemasPlanetarios", (req, res) => {
     SistemaPlanetario.find().populate('planetas').then((sistemas_planetarios) => {
-        res.status(200).send({ 
-            nome_sistema: sistemas_planetarios.nome_sistema,
-            idade_sistema: sistemas_planetarios.idade_sistema,
-            qtd_planetas: sistemas_planetarios.qtd_sistemas
-         });
+        for (const sistema_planetario of sistemas_planetarios) {
+            sistema_planetario.planetas = undefined;
+        }
+        res.status(200).send({ sistemas_planetarios });
     }).catch((err) => {
         res.status(301).send("Erro: " + err);
     })
 })
 
-router.post("/sistemasPlanetarios", (req, res) => {
+router.post("/sistemasPlanetario", (req, res) => {
     const novoSistema = req.body;
     new SistemaPlanetario(novoSistema).save().then(() => {
         res.status(200).send('Requisição recebida com sucesso!');
