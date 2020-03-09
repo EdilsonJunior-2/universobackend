@@ -11,6 +11,8 @@ require("../../models/Estrela");
 const Estrela = mongoose.model("estrelas");
 require("../../models/SistemaPlanetario");
 const SistemaPlanetario = mongoose.model("sistemasPlanetarios");
+require("../../models/Galaxia");
+const Galaxia = mongoose.model("galaxias");
 require("dotenv-safe").config();
 var jwt = require('jsonwebtoken');
 
@@ -236,5 +238,27 @@ router.post("/sistemasPlanetario", (req, res) => {
     })
 });
 
+//Galáxias
+
+router.get("/galaxias", (req, res) => {
+    SistemaPlanetario.find().populate('sistemasPlanetarios').then((galaxias) => {
+        for (const galaxia of galaxias) {
+            galaxia.sistemas = undefined;
+        }
+        res.status(200).send({ galaxias });
+    }).catch((err) => {
+        res.status(301).send("Erro: " + err);
+    })
+})
+
+router.post("/galaxia", (req, res) => {
+    const novaGalaxia = req.body;
+    new Galaxia(novaGalaxia).save().then(() => {
+        res.status(200).send('Requisição recebida com sucesso!');
+    }).catch((err) => {
+        res.redirect("/admin/galaxias");
+        res.status(301).send(err);
+    })
+});
 
 module.exports = router;

@@ -11,7 +11,10 @@ const SistemaPlanetario = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'planetas'
     }],
-    qtd_planetas: Number
+    qtd_planetas: {
+        type: Number,
+        required: true
+    }
 })
 
 SistemaPlanetario.pre("save" , function(next){
