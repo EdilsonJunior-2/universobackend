@@ -10,7 +10,7 @@ const SistemaPlanetario = new Schema({
     idade_sistema: Number,
     planetas: [{
         type: Schema.Types.ObjectId,
-        ref: 'planetas'
+        ref: 'planetas._id'
     }]
 })
 
