@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-var Float = require('mongoose-float').loadType(mongoose);
 
 const SistemaPlanetario = new Schema({
     nome_sistema: {
@@ -8,10 +7,10 @@ const SistemaPlanetario = new Schema({
         required: true
     },
     idade_sistema: Number,
-    planetas: [{
+    qtd_planetas: sizeOf([{
         type: Schema.Types.ObjectId,
         ref: 'planetas'
-    }]
+    }])
 })
 
 mongoose.model("sistemasPlanetarios", SistemaPlanetario);
