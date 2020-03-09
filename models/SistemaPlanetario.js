@@ -11,10 +11,12 @@ const SistemaPlanetario = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'planetas'
     }],
-    qtd_planetas: {
-        type: Number,
-        default: this.planetas.length
-    }
+    qtd_planetas: Number
+})
+
+SistemaPlanetario.pre("save" , function(next){
+    this.qtd_planetas = this.planetas.length;
+    next();
 })
 
 mongoose.model("sistemasPlanetarios", SistemaPlanetario);
