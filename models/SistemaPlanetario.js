@@ -7,18 +7,15 @@ const SistemaPlanetario = new Schema({
         required: true
     },
     idade_sistema: Number,
-    planetas: [{
-        type: Schema.Types.ObjectId,
-        ref: 'planetas'
-    }],
-    qtd_planetas: {
-        type: Number,
-        required: true
-    }
+    id_planetas: [ String ],
+    qtd_planetas: Number,
+    id_estrelas: [ String ],
+    qtd_estrelas: Number
 })
 
 SistemaPlanetario.pre("save" , function(next){
     this.qtd_planetas = this.planetas.length;
+    this.qtd_estrelas = this.estrelas.length;
     next();
 })
 

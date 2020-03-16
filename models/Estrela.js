@@ -14,7 +14,7 @@ const Estrela = new Schema({
     gravidade_estrela: Float,
     tipo_estrela: {
         type: String,
-        default: ""
+        default: "Estrela normal"
     }
 });
 

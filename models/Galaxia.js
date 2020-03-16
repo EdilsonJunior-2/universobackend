@@ -2,17 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Galaxia = new Schema({
-    nome_galaxia: {
+    nome: {
         type: String,
         required: true
     },
-    sistemas: [{
-        type: Schema.Types.ObjectId,
-        ref: 'sistemasPlanetarios'
+    id_sistemas: [{
+        type:String,
+        require: true
     }],
     qtd_sistemas: {
-        type: Number,
-        required: true
+        type: Number
     },
     dist_terra: Number
 })

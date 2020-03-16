@@ -238,6 +238,24 @@ router.post("/sistemaPlanetario", (req, res) => {
     })
 });
 
+router.put("/sistemaPlanetario/edit/:id", (req, res) => {
+    SistemaPlanetario.findByIdAndUpdate(req.params.id, {
+        $set: req.body,
+    }).then(() => {
+        res.status(200).send("Atualizado");
+    }).catch((err) => {
+        res.status(500).send("Erro: " + err);
+    });
+})
+
+router.delete("/sistemaPlanetario/del/:id", (req, res) => {
+    SistemaPlanetario.remove({ _id: req.params.id }).then(() => {
+        res.status(200).send('Deletou de boas')
+    }).catch((err) => {
+        res.status(500).send('Erro ao deletar: ' + err);
+    })
+});
+
 //Galáxias
 
 router.get("/galaxias", (req, res) => {
@@ -258,6 +276,37 @@ router.post("/galaxia", (req, res) => {
     }).catch((err) => {
         res.redirect("/admin/galaxias");
         res.status(500).send(err);
+    })
+});
+
+router.put("/galaxia/edit/:id", (req, res) => {
+    SistemaPlanetario.findByIdAndUpdate(req.params.id, {
+        $set: req.body,
+    }).then(() => {
+        res.status(200).send("Atualizado");
+    }).catch((err) => {
+        res.status(500).send("Erro: " + err);
+    });
+})
+
+router.delete("/galaxia/del/:id", (req, res) => {
+    Galaxia.findById(req.params.id). then( galaxia => {
+        SistemaPlanetario.find().then( sistemas => {
+            for (const idSistemaGalaxia of galaxia.id_sistemas) {
+                if(idSistemaGalaxia == sistemas._id){
+                    SistemaPlanetario.remove({ _id: sistemas._id }).then(() => {
+                        res.status(200).send(`Os sistemas planetários relacionados à galáxia ${galaxia.nome} foram deletadas!`)                
+                    }).catch((err) =>{
+                        res.status(200).send(`Erro ao deletar os sistemas relacionados à galáxia ${galaxia.nome}`)
+                    });
+                }
+            }
+        })
+    });
+    Galaxia.remove({ _id: req.params.id }).then(() => {
+        res.status(200).send('Galáxia deletada')
+    }).catch((err) => {
+        res.status(500).send('Erro ao deletar a galáxia: ' + err);
     })
 });
 
