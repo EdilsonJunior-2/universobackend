@@ -14,8 +14,8 @@ const SistemaPlanetario = new Schema({
 })
 
 SistemaPlanetario.pre("save" , function(next){
-    this.qtd_planetas = this.planetas.length;
-    this.qtd_estrelas = this.estrelas.length;
+    this.qtd_planetas = this.id_planetas.length;
+    this.qtd_estrelas = this.id_estrelas.length;
     next();
 })
 

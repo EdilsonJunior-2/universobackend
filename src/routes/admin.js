@@ -168,7 +168,7 @@ router.delete("/estrela/del/:id", (req, res) => {
 //Anãs brancas
 
 router.get("/anasBrancas", (req, res) => {
-    Estrela.find({tipo_estrela: "Anã branca"}).then((anas_brancas) => {
+    Estrela.find({tipo_estrela: "Anã branca"}).sort({ data: "asc" }).then((anas_brancas) => {
         res.status(200).send({ anas_brancas });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);
@@ -178,7 +178,7 @@ router.get("/anasBrancas", (req, res) => {
 //Anãs vermelhas
 
 router.get("/anasVermelhas", (req, res) => {
-    Estrela.find({tipo_estrela: "Anã vermelha"}).then((anas_vermelhas) => {
+    Estrela.find({tipo_estrela: "Anã vermelha"}).sort({ data: "asc" }).then((anas_vermelhas) => {
         res.status(200).send({ anas_vermelhas });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);
@@ -188,7 +188,7 @@ router.get("/anasVermelhas", (req, res) => {
 //Gigantes azuis
 
 router.get("/gigantesAzuis", (req, res) => {
-    Estrela.find({tipo_estrela: "Gigante azul"}).then((gigantes_azuis) => {
+    Estrela.find({tipo_estrela: "Gigante azul"}).sort({ data: "asc" }).then((gigantes_azuis) => {
         res.status(200).send({ gigantes_azuis });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);
@@ -198,7 +198,7 @@ router.get("/gigantesAzuis", (req, res) => {
 //Gigantes vermelhas
 
 router.get("/gigantesVermelhas", (req, res) => {
-    Estrela.find({tipo_estrela: "Gigante vermelha"}).then((gigantes_vermelhas) => {
+    Estrela.find({tipo_estrela: "Gigante vermelha"}).sort({ data: "asc" }).then((gigantes_vermelhas) => {
         res.status(200).send({ gigantes_vermelhas });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);
@@ -208,7 +208,7 @@ router.get("/gigantesVermelhas", (req, res) => {
 //Estrelas binárias
 
 router.get("/estrelasBinarias", (req, res) => {
-    Estrela.find({tipo_estrela: "Estrela binária"}).then((estrelas_binarias) => {
+    Estrela.find({tipo_estrela: "Estrela binária"}).sort({ data: "asc" }).then((estrelas_binarias) => {
         res.status(200).send({ estrelas_binarias });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);
@@ -218,10 +218,7 @@ router.get("/estrelasBinarias", (req, res) => {
 //Sistemas Planetários
 
 router.get("/sistemasPlanetarios", (req, res) => {
-    SistemaPlanetario.find().populate('planetas').then((sistemas_planetarios) => {
-        for (const sistema_planetario of sistemas_planetarios) {
-            sistema_planetario.planetas = undefined;
-        }
+    SistemaPlanetario.find().sort({ data: "asc" }).then((sistemas_planetarios) => {
         res.status(200).send({ sistemas_planetarios });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);
@@ -259,10 +256,7 @@ router.delete("/sistemaPlanetario/del/:id", (req, res) => {
 //Galáxias
 
 router.get("/galaxias", (req, res) => {
-    SistemaPlanetario.find().populate('sistemasPlanetarios').then((galaxias) => {
-        for (const galaxia of galaxias) {
-            galaxia.sistemas = undefined;
-        }
+    SistemaPlanetario.find().sort({ data: "asc" }).then((galaxias) => {
         res.status(200).send({ galaxias });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);

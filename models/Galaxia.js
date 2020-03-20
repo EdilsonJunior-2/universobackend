@@ -18,7 +18,7 @@ const Galaxia = new Schema({
 
 
 Galaxia.pre("save" , function(next){
-    this.qtd_sistemas = this.sistemas.length;
+    this.qtd_sistemas = this.id_sistemas.length;
     next();
 })
 
