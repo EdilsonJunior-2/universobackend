@@ -256,7 +256,7 @@ router.delete("/sistemaPlanetario/del/:id", (req, res) => {
 //Galáxias
 
 router.get("/galaxias", (req, res) => {
-    SistemaPlanetario.find().sort({ data: "asc" }).then((galaxias) => {
+    Galaxia.find().sort({ data: "asc" }).then((galaxias) => {
         res.status(200).send({ galaxias });
     }).catch((err) => {
         res.status(500).send("Erro: " + err);
@@ -274,7 +274,7 @@ router.post("/galaxia", (req, res) => {
 });
 
 router.put("/galaxia/edit/:id", (req, res) => {
-    SistemaPlanetario.findByIdAndUpdate(req.params.id, {
+    Galaxia.findByIdAndUpdate(req.params.id, {
         $set: req.body,
     }).then(() => {
         res.status(200).send("Atualizado");
