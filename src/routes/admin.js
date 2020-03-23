@@ -191,6 +191,7 @@ router.get("/gigantesAzuis", (req, res) => {
     Estrela.find({tipo_estrela: "Gigante azul"}).sort({ data: "asc" }).then((gigantes_azuis) => {
         res.status(200).send({ gigantes_azuis });
     }).catch((err) => {
+        console.log(err)
         res.status(500).send("Erro: " + err);
     })
 })
@@ -201,6 +202,7 @@ router.get("/gigantesVermelhas", (req, res) => {
     Estrela.find({tipo_estrela: "Gigante vermelha"}).sort({ data: "asc" }).then((gigantes_vermelhas) => {
         res.status(200).send({ gigantes_vermelhas });
     }).catch((err) => {
+        console.log(err)
         res.status(500).send("Erro: " + err);
     })
 })
@@ -211,6 +213,7 @@ router.get("/estrelasBinarias", (req, res) => {
     Estrela.find({tipo_estrela: "Estrela binária"}).sort({ data: "asc" }).then((estrelas_binarias) => {
         res.status(200).send({ estrelas_binarias });
     }).catch((err) => {
+        console.log(err)
         res.status(500).send("Erro: " + err);
     })
 })
@@ -221,6 +224,7 @@ router.get("/sistemasPlanetarios", (req, res) => {
     SistemaPlanetario.find().sort({ data: "asc" }).then((sistemas_planetarios) => {
         res.status(200).send({ sistemas_planetarios });
     }).catch((err) => {
+        console.log(err)
         res.status(500).send("Erro: " + err);
     })
 })
@@ -231,6 +235,7 @@ router.post("/sistemaPlanetario", (req, res) => {
         res.status(200).send('Requisição recebida com sucesso!');
     }).catch((err) => {
         res.redirect("/admin/sistemasPlanetarios");
+        console.log(err)
         res.status(500).send(err);
     })
 });
@@ -241,6 +246,7 @@ router.put("/sistemaPlanetario/edit/:id", (req, res) => {
     }).then(() => {
         res.status(200).send("Atualizado");
     }).catch((err) => {
+        console.log(err)
         res.status(500).send("Erro: " + err);
     });
 })
@@ -249,6 +255,7 @@ router.delete("/sistemaPlanetario/del/:id", (req, res) => {
     SistemaPlanetario.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Deletou de boas')
     }).catch((err) => {
+        console.log(err)
         res.status(500).send('Erro ao deletar: ' + err);
     })
 });
@@ -259,6 +266,7 @@ router.get("/galaxias", (req, res) => {
     Galaxia.find().sort({ data: "asc" }).then((galaxias) => {
         res.status(200).send({ galaxias });
     }).catch((err) => {
+        console.log(err)
         res.status(500).send("Erro: " + err);
     })
 })
@@ -268,6 +276,7 @@ router.post("/galaxia", (req, res) => {
     new Galaxia(novaGalaxia).save().then(() => {
         res.status(200).send('Requisição recebida com sucesso!');
     }).catch((err) => {
+        console.log(err)
         res.redirect("/admin/galaxias");
         res.status(500).send(err);
     })
@@ -279,6 +288,7 @@ router.put("/galaxia/edit/:id", (req, res) => {
     }).then(() => {
         res.status(200).send("Atualizado");
     }).catch((err) => {
+        console.log(err)
         res.status(500).send("Erro: " + err);
     });
 })
@@ -291,7 +301,8 @@ router.delete("/galaxia/del/:id", (req, res) => {
                     SistemaPlanetario.remove({ _id: sistemas._id }).then(() => {
                         res.status(200).send(`Os sistemas planetários relacionados à galáxia ${galaxia.nome} foram deletadas!`)                
                     }).catch((err) =>{
-                        res.status(200).send(`Erro ao deletar os sistemas relacionados à galáxia ${galaxia.nome}`)
+                        console.log(err)
+                        res.status(500).send(`Erro ao deletar os sistemas relacionados à galáxia ${galaxia.nome}`)
                     });
                 }
             }
@@ -300,6 +311,7 @@ router.delete("/galaxia/del/:id", (req, res) => {
     Galaxia.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Galáxia deletada')
     }).catch((err) => {
+        console.log(err)
         res.status(500).send('Erro ao deletar a galáxia: ' + err);
     })
 });
