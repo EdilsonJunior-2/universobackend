@@ -60,7 +60,7 @@ router.get('/planetas', (req, res) => {
     })
 });
 
-router.post('/planetas', (req, res) => {
+router.post('/planeta', (req, res) => {
     const novoPlaneta = req.body;
     new Planeta(novoPlaneta).save().then(() => {
         res.status(200).send('Requisição recebida com sucesso!');
@@ -69,7 +69,7 @@ router.post('/planetas', (req, res) => {
     });
 });
 
-router.put("/planetas/edit/:id", (req, res) => {
+router.put("/planeta/edit/:id", (req, res) => {
     
     Planeta.findByIdAndUpdate(req.params.id, {
         $set: req.body,
@@ -80,7 +80,7 @@ router.put("/planetas/edit/:id", (req, res) => {
     });
 });
 
-router.delete("/planetas/del/:id", (req, res) => {
+router.delete("/planeta/del/:id", (req, res) => {
     Planeta.remove({ _id: req.params.id }).then(() => {
         res.status(200).send('Deletado')
     }).catch((err) => {
