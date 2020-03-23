@@ -260,6 +260,15 @@ router.delete("/sistemaPlanetario/del/:id", (req, res) => {
     })
 });
 
+router.delete("/sistemaPlanetario/deleteAll", (req, res) => {
+    SistemaPlanetario.remove().then(() => {
+        res.status(200).send("Deletou tudo")
+    }).catch((err) => {
+        console.log(err)
+        res.status(500).send("Erro ao deletar tudo: " + err)
+    })
+})
+
 //Galáxias
 
 router.get("/galaxias", (req, res) => {
